@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <ul>
+      {% for item in items %}
+        {% include "menu.html" %}
+      {% endfor %}
+    </ul>
+
+
+{#    <ul>#}
+{#        <li><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></li>#}
+{#        <ul>#}
+{#            {% for subitem in subitems %}#}
+{#        {% include "menu.html" %}#}
+{#                <li><a href="{{ subitem.get_absolute_url }}">{{ subitem.name }} {{ subitem.child.count }}</a></li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </ul>#}
+
+</body>
+</html>
