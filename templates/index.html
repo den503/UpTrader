@@ -1,3 +1,5 @@
+{% load menu %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,23 +7,6 @@
     <title>Index</title>
 </head>
 <body>
-    <ul>
-    {% if item != None %}
-        <li><a style="color: darkgreen" href="{{ item.get_absolute_url }}">{{ item.name }} | childs: {{ item.child.count }}</a>
-        {% if item.child.count > 0 %}
-            <ul>
-                {% for child in item.child.all %}
-                    {% with item=child %}
-                        {% include "menu.html" %}
-                    {% endwith %}
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% else %}
-        {% for item in items %}
-            {% include "menu.html" %}
-        {% endfor %}
-    {% endif %}
-    </ul>
+    {% draw_menu slug %}
 </body>
 </html>

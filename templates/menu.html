@@ -1,11 +1,25 @@
-<li><a style="color: darkred" href="{{ item.get_absolute_url }}">{{ item.name }} | childs: {{ item.child.count }}</a>
+{% load menu %}
+
+{% if item.slug == active.slug %}
+    <li><a style="color: darkgreen" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+    {% decrement counter_nesting_level_from_active as counter_nesting_level_from_active %}
+{% else %}
+    {% if counter_nesting_level_from_active < 3 %}
+        {% decrement counter_nesting_level_from_active as counter_nesting_level_from_active %}
+    {% endif %}
+
+    <li><a style="color: darkred" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+{% endif %}
+
+{% if counter_nesting_level_from_active > 0 %}
     {% if item.child.count > 0 %}
         <ul>
             {% for child in item.child.all %}
-                {% with item=child %}
+                {% with child as item %}
                     {% include "menu.html" %}
                 {% endwith %}
             {% endfor %}
         </ul>
     {% endif %}
+{% endif %}
 </li>

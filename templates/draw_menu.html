@@ -1,0 +1,7 @@
+<ul>
+    {% for item in items %}
+        {% include "menu.html" %}
+    {% empty %}
+        Page not found
+    {% endfor %}
+</ul>
