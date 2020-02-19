@@ -1,11 +1,11 @@
-<li><a href="{{ item.get_absolute_url }}">{{ item.name }} {{ item.child.count }}</a>
-  {% if item.child.count > 0 %}
-    <ul>
-      {% for child in item.child %}
-        {% with item=child %}
-          {% include "menu.html" %}
-        {% endwith %}
-      {% endfor %}
-    </ul>
-  {% endif %}
+<li><a style="color: darkred" href="{{ item.get_absolute_url }}">{{ item.name }} | childs: {{ item.child.count }}</a>
+    {% if item.child.count > 0 %}
+        <ul>
+            {% for child in item.child.all %}
+                {% with item=child %}
+                    {% include "menu.html" %}
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 </li>
