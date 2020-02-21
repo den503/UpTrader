@@ -18,3 +18,15 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('menu:get_menu', args=[self.slug])
 
+
+class Menu(models.Model):
+    name = models.CharField(max_length=255, db_index=True, unique=True)
+    menu_items = models.ManyToManyField(Item, related_name='menu')
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Меню'
+        verbose_name_plural = 'Меню'
+
+    def __str__(self):
+        return str(self.menu_items)

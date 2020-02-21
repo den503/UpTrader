@@ -7,6 +7,7 @@
     <title>Index</title>
 </head>
 <body>
-    {% draw_menu slug %}
+    {% draw_menu 'main_menu' request.path_info%}
+    {% draw_menu 'second_menu' request.path_info%}
 </body>
 </html>

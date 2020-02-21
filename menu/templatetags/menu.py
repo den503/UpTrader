@@ -1,21 +1,26 @@
 from django import template
-from django.urls import reverse
-from menu.models import Item
+from menu.models import Menu
 
 register = template.Library()
 
 
 @register.inclusion_tag('draw_menu.html')
-def draw_menu(slug=None):
+def draw_menu(name=None, slug=None):
     active = None
-    items = Item.objects.select_related('parent')
+    slug = slug if len(slug) > 1 else None
+
+    menu = Menu.objects.prefetch_related('menu_items').get(name=name)
+    items = menu.menu_items.all()
+
     if slug:
-        active = Item.objects.get(slug=slug)
-    return {
-        'active': active,
-        'items': items.exclude(parent__gte=0),
-        'counter_nesting_level_from_active': 3
-    }
+        for item in items:
+            if item.slug == slug[1:]:
+                active = item
+
+    return {'active': active,
+            'items': items.exclude(parent__gte=0),
+            'counter_nesting_level_from_active': 3
+            }
 
 
 @register.simple_tag

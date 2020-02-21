@@ -1,10 +1,10 @@
 {% load menu %}
 
-{% if item.slug == active.slug %}
+{% if item.slug == active.slug%}
     <li><a style="color: darkgreen" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
     {% decrement counter_nesting_level_from_active as counter_nesting_level_from_active %}
 {% else %}
-    {% if counter_nesting_level_from_active < 3 %}
+    {% if counter_nesting_level_from_active < 3  or active.slug == None %}
         {% decrement counter_nesting_level_from_active as counter_nesting_level_from_active %}
     {% endif %}
 
